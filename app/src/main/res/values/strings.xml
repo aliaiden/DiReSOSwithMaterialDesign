@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">DiRe SOS</string>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="FCM_PREF">com.diresos.alihaider.logreg2.fcm_pref</string>
+    <string name="FCM_TOKEN">com.diresos.alihaider.logreg2.fcm_token</string>
+    <string name="sampleText1">We are dedicated to giving you the very best products , DIRESOS is the first ever disaster management solution in Pakistan, Founded in 2016, DIRESOS has come a long way from its beginnings in Pakistan.Primary objective of DIRESOS is to minimize the chaos of disaster.When we first started out, Our passion for drove him to Prosperous position, and gave the impetus to turn hard work and inspiration into to a booming online store. We now serve all over Pakistan</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="drawer_open">D_OPEN</string>
+    <string name="drawer_close">D_CLOSE</string>
+</resources>
