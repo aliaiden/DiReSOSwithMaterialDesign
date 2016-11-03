@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     NavigationView navigationView;
     Toolbar toolbar;
     Button dashboard, sendNot;
-    String app_server_url = "http://192.168.0.116/fcmtest/fcm_insert.php";
+    String app_server_url = "http://dirsos.com/fcm_test/fcm_insert.php";
 
 
     @Override

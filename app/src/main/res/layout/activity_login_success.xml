@@ -1,40 +1,105 @@
-<?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+
+<include
+    layout="@layout/app_bar"
+    android:id="@+id/app_bar"
+    />
+
+
+<android.support.v4.widget.DrawerLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.oneten.alihaider.logreg.LoginSuccess"
-    android:orientation="vertical">
-    <include
-        layout="@layout/app_bar"
-        android:id="@+id/app_bar"
-        />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="0dp"
+        tools:context="com.diresos.alihaider.logreg2.HomeActivity"
+        android:orientation="vertical"
+
+        >
 
 
 
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="name"
-        android:id="@+id/name"
-        android:layout_marginTop="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:textStyle="bold"
-        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="email"
-        android:id="@+id/email"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="name"
+                android:id="@+id/name"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="email"
+                android:id="@+id/email"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:textColor="#ffffff"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+    <fragment
+        android:layout_width="@dimen/nav_drawer_width"
+        android:layout_height="match_parent"
+        app:layout="@layout/fragment_navigation_drawer"
+        android:layout_gravity="start"
+        android:name="com.diresos.alihaider.logreg2.NavigationDrawerFragment"
+        tools:layout="@layout/fragment_navigation_drawer"
+        android:id="@+id/fragment_navigation_drawer"/>
+
+
+
+
+</android.support.v4.widget.DrawerLayout>
+
+
 </LinearLayout>

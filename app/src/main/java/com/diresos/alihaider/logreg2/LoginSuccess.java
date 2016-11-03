@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class LoginSuccess extends AppCompatActivity {
+    NavigationView navigationView;
     TextView name,email;
     Toolbar toolbar;
 
@@ -22,10 +25,23 @@ public class LoginSuccess extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_success);
 
+        navigationView=(NavigationView) findViewById(R.id.nav_view);
+
 
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
+
+        //Initializing the navigation drawer
+        NavigationDrawerFragment drawerFragment=(NavigationDrawerFragment)
+                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
+
+
 
 
         Bundle bundle=getIntent().getExtras();

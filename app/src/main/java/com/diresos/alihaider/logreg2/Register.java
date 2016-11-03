@@ -30,12 +30,12 @@ public class Register extends AppCompatActivity {
     EditText Name, Email, Username, Password, ConPassword;
     String name, email, username, password, conPass;
     AlertDialog.Builder builder;
-    String reg_url = "http://192.168.0.116/register.php";
+    String reg_url = "http://dirsos.com/app_files/register.php";
     int i;
 
     String successfulRegisterMessage;
 
-    String app_server_url = "http://192.168.0.116/fcmtest/fcm_insert.php";
+    String app_server_url = "http://dirsos.com/fcmtest/fcm_insert.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
