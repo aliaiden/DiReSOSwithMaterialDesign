@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,8 +40,6 @@ public class HomeActivity extends AppCompatActivity {
     Button dashboard, sendNot;
     String app_server_url = "http://dirsos.com/fcm_test/fcm_insert.php";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,19 +56,42 @@ public class HomeActivity extends AppCompatActivity {
 
 
         //Initializing the navigation drawer
-        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
+        final NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
 
+                android.app.FragmentManager myFrag = getFragmentManager();
+
+
                 switch (item.getItemId()) {
 
                     case R.id.nav_quick_post:
+                        myFrag.beginTransaction().replace(R.id.fLayout, new QuickPostFragment()).commit();
+                       // Intent i = new Intent(HomeActivity.this, PostActivity.class);
+                        //startActivity(i);
+                        break;
 
-                        Intent i = new Intent(HomeActivity.this, PostActivity.class);
-                        startActivity(i);
+                    case R.id.nav_missing_person:
+                        myFrag.beginTransaction().replace(R.id.fLayout, new MissingPersonFragment()).commit();
+                        break;
+
+                    case R.id.nav_donate:
+                        myFrag.beginTransaction().replace(R.id.fLayout, new DonateFragment()).commit();
+                        break;
+
+                    case R.id.nav_announcments:
+                        myFrag.beginTransaction().replace(R.id.fLayout, new AnnouncementsFragment()).commit();
+                        break;
+
+                    case R.id.nav_about:
+                        myFrag.beginTransaction().replace(R.id.fLayout, new AboutFragment()).commit();
+                        break;
+
+                    case R.id.nav_events:
+                        myFrag.beginTransaction().replace(R.id.fLayout, new EventsFragment()).commit();
                         break;
                 }
                 return true;

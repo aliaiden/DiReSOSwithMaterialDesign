@@ -47,13 +47,13 @@
         android:id="@+id/bn_login"
         android:layout_gravity="center_horizontal"
         android:background="@color/colorAccent"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Continue as guest >>>"
-        android:textStyle="bold"
         android:textColor="@color/colorAccent"
         android:id="@+id/bSkip"
         android:textSize="20dp"
