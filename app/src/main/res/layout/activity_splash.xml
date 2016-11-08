@@ -1,21 +1,64 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context="com.diresos.alihaider.logreg2.SplashActivity"
-    >
+    android:padding="40dp"
+    android:orientation="vertical">
 
 
     <ImageView
-        android:layout_width="500dp"
-        android:layout_height="900dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:src="@drawable/logo"
         android:gravity="center"
-        android:layout_marginTop="50dp"
         android:id="@+id/ivLogo"
-        android:layout_centerInParent="true"
-        android:contentDescription="dire_sos_logo"/>
+        android:layout_marginTop="10dp"
+        />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Disaster Relief Smart Online System"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="10dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:layout_marginTop="20dp"
+        android:id="@+id/login_name"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_marginTop="20dp"
+        android:id="@+id/login_password"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textColor="#ffffff"
+        android:id="@+id/bn_login"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorAccent"
+        android:layout_marginTop="20dp"/>
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continue as guest >>>"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:id="@+id/bSkip"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        />
+
+</LinearLayout>
