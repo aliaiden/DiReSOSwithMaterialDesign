@@ -1,13 +1,17 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.diresos.alihaider.logreg2.MissingPersonFragment">
+    tools:context="com.diresos.alihaider.logreg2.MissingPersonFragment"
+    android:orientation="vertical"
+    android:background="#444444">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Missing Person" />
+        android:layout_height="wrap_content"
+        android:text="Missing Person Registry"
+        android:textSize="30sp"
+        android:gravity="center"/>
 
-</FrameLayout>
+</LinearLayout>

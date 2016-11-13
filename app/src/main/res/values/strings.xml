@@ -12,4 +12,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">D_OPEN</string>
     <string name="drawer_close">D_CLOSE</string>
+    <string name="about_us_text1">DIRESOS is the first ever disaster management solution in Pakistan, Founded in 2016, DIRESOS has come a long way from its beginnings in Pakistan.Primary objective of DIRESOS is to minimize the chaos of disaster.When we first started out, Our passion for drove him to Prosperous position, and gave the impetus to turn hard work and inspiration into to a booming online store. We now serve all over Pakistan\n\n</string>
+    <string name="about_us_text2">Disaster Management System is aimed to develop a system that provides the pre disaster and post disaster solutions. This is a web based application which cope all the phases of disaster. In general, this system supports the disaster management and reduces losses during disasters, natural catastrophes and emergency situations. The system provides critical decisions on the user queries according to their requirements and uses them for their specific problems.</string>
 </resources>

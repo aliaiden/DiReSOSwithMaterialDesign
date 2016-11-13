@@ -72,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
                         myFrag.beginTransaction().replace(R.id.fLayout, new QuickPostFragment()).commit();
                        // Intent i = new Intent(HomeActivity.this, PostActivity.class);
                         //startActivity(i);
+
                         break;
 
                     case R.id.nav_missing_person:

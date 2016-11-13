@@ -16,12 +16,13 @@
         android:padding="5dp">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="40dp"
             android:gravity="left"
-            android:src="@drawable/logo" />
+            android:layout_gravity="left"
+            android:src="@drawable/logo3d" />
 
         <TextView
             android:layout_width="match_parent"
@@ -32,21 +33,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Sir Syed University of Engineering Technology"
-            android:textColor="#ffffff"
-            android:textSize="12sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Department of Computer Engineering"
-            android:textColor="#ffffff"
-            android:textSize="12sp" />
 
 
     </LinearLayout>
