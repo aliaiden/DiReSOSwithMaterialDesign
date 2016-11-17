@@ -16,19 +16,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
-        android:text="Post Request"
+        android:layout_marginBottom="0dp"
+        android:text="Add Missing Person"
         android:textSize="30sp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
+            android:layout_height="wrap_content"
+            >
 
 
             <android.support.design.widget.TextInputLayout
@@ -36,41 +37,73 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/etSenderName"
+                <EditText android:id="@+id/et_missing_person_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:hint="Enter Your Name" />
+                    android:inputType="text"
+                    android:hint="Missing Person's Name" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Password Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+                <EditText android:id="@+id/input_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Gender"/>
             </android.support.design.widget.TextInputLayout>
 
 
-
-
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/etEmail"
+                <EditText android:id="@+id/et_age"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textWebEmailAddress"
-                    android:hint="Enter Your Email Address" />
+                    android:inputType="textPassword"
+                    android:hint="Age"/>
             </android.support.design.widget.TextInputLayout>
-
-
-
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/etContactNum"
+                <EditText android:id="@+id/et_last_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:hint="Enter Your Contact Number" />
+                    android:hint="Person's Last Known Location"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+                <EditText android:id="@+id/et_appearence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Appearance Details (Seperated By Commas)"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+                <EditText android:id="@+id/et_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Your Contact Number"/>
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -80,64 +113,43 @@
                 android:text="Choose Picture" />
 
             <ImageView
-                android:id="@+id/ivPic"
+                android:id="@+id/iv_missing_person_pic"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/logo"
+                android:src="@drawable/sample_image_view"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
-
-
-                <Button
-                    android:id="@+id/bCamera"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Camera"
-                     />
-
-
-                <Button
-                    android:id="@+id/bGallery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gallery" />
-
-            </LinearLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/etPostDetails"
+                <EditText android:id="@+id/et_description"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:inputType="text"
-                    android:hint="Enter Details"
-                    android:gravity="top"/>
+                    android:inputType="textLongMessage"
+                    android:gravity="top"
+                    android:hint="Enter Brief Description"/>
             </android.support.design.widget.TextInputLayout>
 
 
+
+
             <Button
-                android:id="@+id/b_send_post"
+                android:id="@+id/b_submit_missing_person"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
-                android:text="POST"
+                android:text="Add Person"
                 android:textColor="@color/colorAccent" />
+
 
 
         </LinearLayout>
     </ScrollView>
-
 
 </LinearLayout>

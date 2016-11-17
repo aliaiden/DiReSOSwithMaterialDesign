@@ -19,9 +19,9 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="40dp"
-            android:gravity="left"
-            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
             android:src="@drawable/logo3d" />
 
         <TextView
@@ -30,8 +30,25 @@
             android:gravity="left"
             android:text="Disaster Relief Smart Online System"
             android:textColor="#ffffff"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Sir Syed University of Engineering and Technology"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            android:textStyle="italic" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Computer Engineering Department"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            android:textStyle="italic" />
+
 
 
 

@@ -14,7 +14,7 @@ import static java.security.AccessController.getContext;
 /**
  * Created by Ali Haider on 11/8/2016.
  */
-public class MyRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyRecycleAdapterAnnouncements extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public String myDataSet[];
     public String designations[];
@@ -26,7 +26,7 @@ public class MyRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     //  public TextView cod;
 
 
-    public MyRecycleAdapter(Context context, String MyDataSet[], String Designations[]) {
+    public MyRecycleAdapterAnnouncements(Context context, String MyDataSet[], String Designations[]) {
         this.myDataSet = MyDataSet;
         this.designations = Designations;
         this.context = context;

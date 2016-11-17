@@ -1,7 +1,6 @@
 package com.diresos.alihaider.logreg2;
 
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,7 +39,7 @@ public class AnnouncementsFragment extends Fragment {
         };
         //String companyCode[] = {"001","002","003"};
 
-        RecyclerView.Adapter adaptor = new MyRecycleAdapter(view.getContext(),myDataSet, Designations);
+        RecyclerView.Adapter adaptor = new MyRecycleAdapterAnnouncements(view.getContext(),myDataSet, Designations);
         rv.setAdapter(adaptor);
 
         return view;

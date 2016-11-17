@@ -25,20 +25,32 @@
         android:textColor="#ffffff"
         android:layout_marginTop="10dp"
         />
-    <EditText
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
-        android:layout_marginTop="20dp"
-        android:id="@+id/login_name"
-        />
-    <EditText
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="0dp">
+        <EditText android:id="@+id/login_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Username" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_marginTop="20dp"
-        android:id="@+id/login_password"/>
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Password" />
+    </android.support.design.widget.TextInputLayout>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
