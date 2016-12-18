@@ -8,10 +8,18 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.R.id.list;
 
 
 /**
@@ -20,8 +28,10 @@ import android.widget.Button;
 public class MissingPersonFragment extends Fragment {
 
     View view;
+    EditText search;
     RecyclerView rv;
     FloatingActionButton bAddMissingPerson;
+    RecyclerView.Adapter adaptor;
 
     @Nullable
     @Override
@@ -29,6 +39,9 @@ public class MissingPersonFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_missing_person, container, false);
         bAddMissingPerson = (FloatingActionButton) view.findViewById(R.id.bAddMissingPerson);
+        search = (EditText) view.findViewById( R.id.search);
+
+
 
 
         bAddMissingPerson.setOnClickListener(new View.OnClickListener() {
@@ -57,9 +70,14 @@ public class MissingPersonFragment extends Fragment {
         };
         //String companyCode[] = {"001","002","003"};
 
-        RecyclerView.Adapter adaptor = new MyRecycleAdapterMissingPerson(view.getContext(),myDataSet, Designations);
+        adaptor = new MyRecycleAdapterMissingPerson(view.getContext(),myDataSet, Designations);
         rv.setAdapter(adaptor);
 
         return view;
+
+
     }
+
+
+
 }
