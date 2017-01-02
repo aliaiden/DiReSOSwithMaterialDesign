@@ -56,7 +56,6 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
     @TargetApi(Build.VERSION_CODES.M)
     private void setFlipperImage(int res) {
         Log.i("Set Filpper Called", res+"");
