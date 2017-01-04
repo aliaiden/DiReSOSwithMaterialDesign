@@ -43,9 +43,6 @@
                     android:hint="Enter Your Name" />
             </android.support.design.widget.TextInputLayout>
 
-
-
-
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,9 +54,6 @@
                     android:inputType="textWebEmailAddress"
                     android:hint="Enter Your Email Address" />
             </android.support.design.widget.TextInputLayout>
-
-
-
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -103,7 +97,6 @@
                     android:text="Camera"
                      />
 
-
                 <Button
                     android:id="@+id/bGallery"
                     android:layout_width="wrap_content"
@@ -111,6 +104,16 @@
                     android:text="Gallery" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvChooseCategory"
+                android:gravity="center"
+                android:text="Choose Category"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,7 +126,6 @@
                     android:hint="Enter Details"
                     android:gravity="top"/>
             </android.support.design.widget.TextInputLayout>
-
 
             <Button
                 android:id="@+id/b_send_post"

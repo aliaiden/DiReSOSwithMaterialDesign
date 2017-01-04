@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import java.util.Timer;
@@ -24,13 +25,11 @@ public class HomeFragment extends Fragment {
     Timer timer = new Timer();
 
 
-
     int gallery_grid_Images[]={R.drawable.home_flipper_image1,R.drawable.home_flipper_image2,R.drawable.home_flipper_image3,
             R.drawable.home_flipper_image4,R.drawable.home_flipper_image5};
 
     View view;
     ViewFlipper viewFlipper;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,10 +49,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-
-
-
         return view;
     }
     @TargetApi(Build.VERSION_CODES.M)
