@@ -19,6 +19,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +40,15 @@ import static android.R.id.list;
  * A simple {@link Fragment} subclass.
  */
 public class MissingPersonFragment extends Fragment {
+
+    String missingPersonNames[];
+    String genders[];
+    String ages[];
+    String lastLocations[];
+    String appearances[];
+    String contacts[];
+    String images[];
+    String descriptions[];
 
     View view;
     EditText search;
@@ -67,18 +86,23 @@ public class MissingPersonFragment extends Fragment {
         RecyclerView.LayoutManager lm = new LinearLayoutManager(view.getContext());
         rv.setLayoutManager(lm);
 
-        String myDataSet[] = {"3rd Missing Person", "2nd Missing Person", "1st Missing Person"};
-        String Designations[] = {
-                "This a sample missing person's details. Original details will be fetched from webservice provided from the website.",
-                "This a sample missing person's details. Original details will be fetched from webservice provided from the website.",
-                "This a sample missing person's details. Original details will be fetched from webservice provided from the website."
-        };
+
+
+
+        fetchDataFromServer();
+
+//        String myDataSet[] = {"3rd Missing Person", "2nd Missing Person", "1st Missing Person"};
+//        String Designations[] = {
+//                "This a sample missing person's details. Original details will be fetched from webservice provided from the website.",
+//                "This a sample missing person's details. Original details will be fetched from webservice provided from the website.",
+//                "This a sample missing person's details. Original details will be fetched from webservice provided from the website."
+//        };
         //String companyCode[] = {"001","002","003"};
 
-        adaptor = new MyRecycleAdapterMissingPerson(view.getContext(),myDataSet, Designations);
+        adaptor = new MyRecycleAdapterMissingPerson(view.getContext(),missingPersonNames,genders,ages,lastLocations,appearances,contacts,images,descriptions);
         rv.setAdapter(adaptor);
 
-        addTextListener(myDataSet, Designations);
+        addTextListener(missingPersonNames, genders);
 
         return view;
         
@@ -87,12 +111,71 @@ public class MissingPersonFragment extends Fragment {
 
     }
 
+
+
+
+
+
+
+
+
+    private void fetchDataFromServer() {
+        String url = "http://app.dirsos.com/api/getMissingPerson";
+        JsonArrayRequest stringRequest = new JsonArrayRequest(url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        //Toast.makeText(DetailClass.this, response.toString(), Toast.LENGTH_SHORT).show();
+                        missingPersonNames = new String[response.length()];
+                        genders = new String[response.length()];
+                        ages = new String[response.length()];
+                        lastLocations = new String[response.length()];
+                        appearances = new String[response.length()];
+                        contacts = new String[response.length()];
+                        images = new String[response.length()];
+                        descriptions = new String[response.length()];
+
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+
+                                JSONObject obj = response.getJSONObject(i);
+                                missingPersonNames[i] = obj.getString("Name");
+                                genders[i] = obj.getString("gender");
+                                ages[i] = obj.getString("age");
+                                lastLocations[i] = obj.getString("last_loc");
+                                appearances[i] = obj.getString("appearence");
+                                contacts[i] = obj.getString("Contact");
+                                images[i] = obj.getString("Picture");
+                                descriptions[i] = obj.getString("detail");
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            //prog.dismiss();
+                            RecyclerView.Adapter rAdaptor  = new MyRecycleAdapterMissingPerson(view.getContext(),missingPersonNames,genders,ages,lastLocations,appearances,contacts,images,descriptions);
+                            rAdaptor.notifyDataSetChanged();
+                            rv.setAdapter(rAdaptor);
+
+                        }
+                    }
+                },
+
+                new Response.ErrorListener()
+
+                {
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(view.getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
+        requestQueue.add(stringRequest);
+    }
+
     private void addTextListener(final String[] myDataSet, final String[] designations) {
 
         final String[] filteredDataSet = null;
         final String[] filteredDesignations = null;
-
-
 
         if (myDataSet != null || designations != null) {
 
@@ -141,7 +224,7 @@ public class MissingPersonFragment extends Fragment {
                     filteredDesignations[filteredList.size()] = filteredList.toString();
 
                     rv.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                    adaptor = new MyRecycleAdapterMissingPerson(view.getContext(),filteredDataSet, filteredDesignations);
+                    //adaptor = new MyRecycleAdapterMissingPerson(view.getContext(),filteredDataSet, filteredDesignations);
                     //adaptor = new MyRecycleAdapterMissingPerson(filteredList, view.getContext());
                     rv.setAdapter(adaptor);
                     adaptor.notifyDataSetChanged();  // data set changed

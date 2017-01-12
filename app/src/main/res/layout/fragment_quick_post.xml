@@ -71,7 +71,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#000000"
-                android:text="Choose Picture" />
+                android:text="Choose Picture"
+                android:textSize="18dp"/>
 
             <ImageView
                 android:id="@+id/ivPic"
@@ -113,6 +114,17 @@
                 android:text="Choose Category"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#000000">
+            <Spinner
+                android:id="@+id/spinnerCategory"
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:textSize="20sp"
+                android:prompt="@string/post_category_spinner_text"/>
+            </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

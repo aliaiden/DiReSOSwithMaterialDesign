@@ -44,19 +44,30 @@
                     android:hint="Missing Person's Name" />
             </android.support.design.widget.TextInputLayout>
 
-            <!-- Password Label -->
-            <android.support.design.widget.TextInputLayout
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Gender"/>
+            <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/input_password"
-                    android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/rgGender"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:hint="Gender"/>
-            </android.support.design.widget.TextInputLayout>
+                    android:text="Male"
+                    android:id="@+id/rbMale"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:id="@+id/rbFemale"
+                    />
 
+            </RadioGroup>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -66,7 +77,7 @@
                 <EditText android:id="@+id/et_age"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
+                    android:inputType="number"
                     android:hint="Age"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -78,7 +89,7 @@
                 <EditText android:id="@+id/et_last_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:hint="Person's Last Known Location"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -110,14 +121,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#000000"
-                android:text="Choose Picture" />
+                android:text="Add Picture" />
 
             <ImageView
                 android:id="@+id/iv_missing_person_pic"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/sample_image_view"
+                android:background="@drawable/sample_image_view"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"/>
 

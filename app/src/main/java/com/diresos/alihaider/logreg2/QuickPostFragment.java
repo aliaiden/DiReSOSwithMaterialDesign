@@ -21,10 +21,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,24 +45,31 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
-
 
 public class QuickPostFragment extends Fragment {
 
     EditText etSenderName, etSenderEmail, etSenderContact, etPostDetails;
     String sname, email, post, contact, image, post_cat, p_time, p_date, status;
     TextView chooseCategory;
+    Spinner chooseCategorySpinner;
 
     Button bSend, bGallery;
     Button bCamera;
     ImageView ivPic;
     View view;
+    Bitmap bitmap;
+
+    String[] categoryId;
+    String[] categoryName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,16 +79,36 @@ public class QuickPostFragment extends Fragment {
 
         status = "1";
 
+        etSenderName = (EditText) view.findViewById(R.id.etSenderName);
+        etSenderEmail = (EditText) view.findViewById(R.id.etEmail);
+        etPostDetails = (EditText) view.findViewById(R.id.etPostDetails);
+        etSenderContact = (EditText) view.findViewById(R.id.etContactNum);
         bCamera = (Button) view.findViewById(R.id.bCamera);
         bGallery = (Button) view.findViewById(R.id.bGallery);
         bSend = (Button) view.findViewById(R.id.b_send_post);
         ivPic = (ImageView) view.findViewById(R.id.ivPic);
         chooseCategory = (TextView) view.findViewById(R.id.tvChooseCategory);
+        chooseCategorySpinner = (Spinner) view.findViewById(R.id.spinnerCategory);
+
+        // Spinner Drop down elements
+        List<String> categories = new ArrayList<String>();
+        categories.add("Hospital");
+        categories.add("N.G.O");
+        categories.add("Other");
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categories);
+        // attaching data adapter to spinner
+        chooseCategorySpinner.setAdapter(dataAdapter);
 
         //convert image into b64 string
-        Bitmap bitmapOrg = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
-        ByteArrayOutputStream bao = new ByteArrayOutputStream();
-        bitmapOrg.compress(Bitmap.CompressFormat.JPEG, 100, bao);
+
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 8;
+
+        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+        final ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bao);
         byte[] ba = bao.toByteArray();
         image = Base64.encodeToString(ba, Base64.DEFAULT);
 
@@ -104,19 +135,18 @@ public class QuickPostFragment extends Fragment {
             }
         });
 
-
         bSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-
                 try {
                     initialize();
+
+                    sendDataToServer(sname, email, post, contact, image, post_cat, p_time, p_date, status);
+
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-                sendDataToServer(sname, email, post, contact, image, post_cat, p_time, p_date, status);
 
 
             }
@@ -128,25 +158,69 @@ public class QuickPostFragment extends Fragment {
     }
 
     private void showAlertDialog() {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.post_category_dialog, null);
-        dialogBuilder.setView(dialogView);
+//        ArrayList a = new ArrayList();
+//
+//        a.add("Hospital");
+//        a.add("N.G.O");
+//        a.add("Other");
+//
+//
+//        AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+//
+//        ListView v = (ListView) getActivity().getLayoutInflater().inflate(R.layout.quick_post_choose_category_item,null);
+//
+//        b.setView(v);
+//
+//        final AlertDialog alert = b.create();
+//
+//        alert.show();
+//
+//        ArrayAdapter ad;
+//        ad = new ArrayAdapter(this,android.R.layout.quick_post_choose_category_item,a);
+//
+//        v.setAdapter(ad);
+//
+//        v.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//            }
+//
+//
+//        });
+// Dialog d = new Dialog(this);
+//­ d.setContentView(R.layo­ut.x);
+//
+//
+//­ ListView l = (ListView) d.findViewById(R.id.lis­t);
+// d.show();
+//        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+//        LayoutInflater inflater = getActivity().getLayoutInflater();
+//        final View dialogView = inflater.inflate(R.layout.post_category_dialog, null);
+//        dialogBuilder.setView(dialogView);
+//
+//        final EditText smsMessage = (EditText) dialogView.findViewById(R.id.etSMSmessage);
+//        //dialogBuilder.setTitle("Send us an SMS");
+//        dialogBuilder.setPositiveButton("SEND", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//
+//
+//            }
+//        });
+//        AlertDialog b = dialogBuilder.create();
+//        b.show();
+    }
+    private void getPostCategories(){
 
-        final EditText smsMessage = (EditText) dialogView.findViewById(R.id.etSMSmessage);
-        //dialogBuilder.setTitle("Send us an SMS");
-        dialogBuilder.setPositiveButton("SEND", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
+        String categoryURL = "http://app.dirsos.com/api/getCategory";
 
 
-            }
-        });
-        AlertDialog b = dialogBuilder.create();
-        b.show();
+
     }
 
 
-    private void sendDataToServer(final String sname, final String email, final String post, final String contact, final String image, String post_cat, String p_time, String p_date, String status) {
+    private void sendDataToServer(final String sname, final String email, final String post, final String contact, final String image, String post_cat, String p_time, String p_date, String status)
+    {
         post_cat = "1";
 
         String url = "http://app.dirsos.com/api/setPost";
@@ -236,6 +310,15 @@ public class QuickPostFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 //Converting Bitmap to String
+                //bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bao);
+                byte[] ba = bao.toByteArray();
+              //  image = Base64.encodeToString(ba, Base64.DEFAULT);
+                //Log.d("B64 IMAGE", image);
+                //image = URLEncoder.encode(image, "UTF-8");
+
+                //Log.d("ENCODED IMAGE", image);
 
                 Map<String,String> params = new Hashtable<String, String>();
 
@@ -247,8 +330,8 @@ public class QuickPostFragment extends Fragment {
                 params.put("image", image);
                 params.put("post_cat", "post_cat");
                 params.put("p_time", "p_time");
+                params.put("p_date", "p_date");
                 params.put("status", "1");
-
 
                 //returning parameters
                 return params;
@@ -261,9 +344,6 @@ public class QuickPostFragment extends Fragment {
         //Adding request to the queue
         requestQueue.add(stringRequest);
     }
-
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void CheckStatus(String response) {
@@ -278,20 +358,22 @@ public class QuickPostFragment extends Fragment {
             Toast.makeText(((Activity) getContext()), response, Toast.LENGTH_SHORT).show();
         }
 
-
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap pic = (Bitmap) extras.get("data");
-            ivPic.setImageBitmap(pic);
+            bitmap = (Bitmap) extras.get("data");
+            ivPic.setImageBitmap(bitmap);
+            final ByteArrayOutputStream bao = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bao);
+            byte[] ba = bao.toByteArray();
+            image = Base64.encodeToString(ba, Base64.DEFAULT);
+            Log.d("B64 IMAGE", image);
+
         }
         if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
-
-
 
             Uri pickedImage = data.getData();
             // Let's read picked image path using content resolver
@@ -302,16 +384,28 @@ public class QuickPostFragment extends Fragment {
 
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            Bitmap galleryPic = BitmapFactory.decodeFile(imagePath, options);
-            ivPic.setImageBitmap(galleryPic);
+            bitmap = BitmapFactory.decodeFile(imagePath, options);
+            ivPic.setImageBitmap(bitmap);
 
             // Do something with the bitmap
+            final ByteArrayOutputStream bao = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bao);
+            byte[] ba = bao.toByteArray();
+            image = Base64.encodeToString(ba, Base64.DEFAULT);
+            Log.d("B64 IMAGE", image);
 
 
             // At the end remember to close the cursor or you will end with the RuntimeException!
             cursor.close();
         }
-    }
+//        else if(resultCode != RESULT_CANCELED){
+//                if (requestCode == 1) {
+//                    Bitmap photo = (Bitmap) data.getExtras().get("data");
+//                    ivPic.setImageBitmap(photo);
+//                }
+//            }
+        }
+
 
     private void initialize() throws UnsupportedEncodingException {
 
@@ -322,30 +416,14 @@ public class QuickPostFragment extends Fragment {
 
         p_time = dateFormat.format(date).toString().substring(10);
 
+        post_cat = (String) chooseCategorySpinner.getSelectedItem().toString();;
+
         //get strings from edit texts
-
-        etSenderName = (EditText) view.findViewById(R.id.etSenderName);
         sname = etSenderName.getText().toString();
-
-        etSenderEmail = (EditText) view.findViewById(R.id.etEmail);
         email = etSenderEmail.getText().toString();
-
-        etPostDetails = (EditText) view.findViewById(R.id.etPostDetails);
         post = etPostDetails.getText().toString();
-
-        etSenderContact = (EditText) view.findViewById(R.id.etContactNum);
         contact = etSenderContact.getText().toString();
 
-        Bitmap bitmapOrg = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
-        ByteArrayOutputStream bao = new ByteArrayOutputStream();
-        bitmapOrg.compress(Bitmap.CompressFormat.JPEG, 100, bao);
-        byte[] ba = bao.toByteArray();
-        image = Base64.encodeToString(ba, Base64.DEFAULT);
-        Log.d("B64 IMAGE", image);
-        image = URLEncoder.encode(image, "UTF-8");
-
-        Log.d("ENCODED IMAGE", image);
     }
-
 
 }
