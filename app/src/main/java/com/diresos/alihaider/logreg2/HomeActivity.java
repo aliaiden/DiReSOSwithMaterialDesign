@@ -37,7 +37,8 @@ public class HomeActivity extends AppCompatActivity {
     NavigationView navigationView;
     Toolbar toolbar;
     Button dashboard, sendNot;
-    String app_server_url = "http://dirsos.com/fcm_test/fcm_insert.php";
+    //String app_server_url = "http://dirsos.com/fcm_test/fcm_insert.php";
+    String app_server_url = "http://app.dirsos.com/api/insertToken";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,14 @@ public class HomeActivity extends AppCompatActivity {
         final android.app.FragmentManager myFrag = getFragmentManager();
 
         setContentView(R.layout.activity_home);
+
+
+        //send token to server at start of activity
+        sendTokenValue();
+
+        //set fragment at start of activity
         myFrag.beginTransaction().replace(R.id.fLayout, new HomeFragment()).commit();
+
 
 
 
@@ -71,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        myFrag.beginTransaction().replace(R.id.fLayout, new HomeFragment()).commit();
+                        //myFrag.beginTransaction().replace(R.id.fLayout, new HomeFragment()).commit();
                         // Intent i = new Intent(HomeActivity.this, PostActivity.class);
                         //startActivity(i);
 
@@ -165,7 +173,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        sendNot.setOnClickListener(new View.OnClickListener() {
+        sendNot.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
 
@@ -196,6 +205,34 @@ public class HomeActivity extends AppCompatActivity {
                 MySingleton.getInstance(HomeActivity.this).addToRequestQueue(stringRequest);
             }
         });
+    }
+
+    private void sendTokenValue() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.FCM_PREF), Context.MODE_PRIVATE);
+        final String token = sharedPreferences.getString(getString(R.string.FCM_TOKEN), "");
+        Log.d("TOKENTOKTOKENTOKENTOKE", token);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, app_server_url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("fcm_token", token);
+
+                return params;
+            }
+        };
+        MySingleton.getInstance(HomeActivity.this).addToRequestQueue(stringRequest);
     }
 
     private void showSMSDialog() {

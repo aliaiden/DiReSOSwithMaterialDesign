@@ -17,73 +17,53 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/sample_missing_person"
-                android:padding="5dp"
-                android:id="@+id/ivMissingPersonPic"/>
+            android:orientation="vertical"
+            android:weightSum="1">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_margin="10dp">
-
-
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:gravity="left"/>
-
-            <TextView
-                android:id="@+id/tvGender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Gender"
-                android:textColor="#000000"
-                android:textSize="15sp" />
                 <TextView
-                    android:id="@+id/tvAge"
+                    android:id="@+id/tvSenderName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Age"
+                    android:text="Name"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:gravity="left"/>
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Time"
                     android:textColor="#000000"
                     android:textSize="15sp" />
                 <TextView
-                    android:id="@+id/tvAppearance"
+                    android:id="@+id/tvDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Appearance "
+                    android:text="Date"
                     android:textColor="#000000"
                     android:textSize="15sp" />
-                <TextView
-                    android:id="@+id/tvLastLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Last Known Location"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
-                <TextView
-                    android:id="@+id/tvContact"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Contact Number"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tvDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Description"
+                    android:text="Description "
                     android:textColor="#000000"
                     android:textSize="15sp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logo"
+                    android:padding="5dp"
+                    android:id="@+id/ivPost"
+                    android:layout_weight="0.43" />
 
 
             </LinearLayout>
