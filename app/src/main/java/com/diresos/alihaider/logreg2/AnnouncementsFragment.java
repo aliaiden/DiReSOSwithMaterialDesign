@@ -27,8 +27,9 @@ import org.json.JSONObject;
 public class AnnouncementsFragment extends Fragment {
 
     String titles[];
+    //={"Volunteers Gathering"};
     String messages[];
-
+    //={"People who are willing to participate in the relief providing process mus make sure to be present at Edhi meeting center at 5pm"};
 
     View view;
     RecyclerView rv;
@@ -70,8 +71,8 @@ public class AnnouncementsFragment extends Fragment {
                             try {
 
                                 JSONObject obj = response.getJSONObject(i);
-                                titles[i] = obj.getString("Name");
-                                messages[i] = obj.getString("gender");
+                                titles[i] = obj.getString("title");
+                                messages[i] = obj.getString("message");
 
 
                             } catch (JSONException e) {

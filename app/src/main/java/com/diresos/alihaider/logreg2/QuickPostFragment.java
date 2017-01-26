@@ -58,7 +58,15 @@ import static android.app.Activity.RESULT_OK;
 public class QuickPostFragment extends Fragment {
 
     EditText etSenderName, etSenderEmail, etSenderContact, etPostDetails;
-    String sname, email, post, contact, image, post_cat, p_time, p_date, status;
+    String sname;
+    String email;
+    String post;
+    String contact;
+    String image;
+    int post_cat;
+    String p_time;
+    String p_date;
+    String status;
     TextView chooseCategory;
     Spinner chooseCategorySpinner;
 
@@ -139,13 +147,16 @@ public class QuickPostFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                try {
-                    initialize();
+                if (checkFields()) {
 
-                    sendDataToServer(sname, email, post, contact, image, post_cat, p_time, p_date, status);
+                    try {
+                        initialize();
 
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                        sendDataToServer(sname, email, post, contact, image, "" + post_cat, p_time, p_date, status);
+
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 }
 
 
@@ -153,8 +164,29 @@ public class QuickPostFragment extends Fragment {
         });
 
 
-
         return view;
+    }
+
+    private boolean checkFields() {
+        boolean returnValue=true;
+        if (sname == null | sname == "") {
+            etSenderName.setError("Please fill this");
+            returnValue = false;
+        }
+        else if (email == null | email == "") {
+            etSenderEmail.setError("Please fill this");
+            returnValue = false;
+        }
+        else if (contact == null | contact == "") {
+            etSenderContact.setError("Please fill this");
+            returnValue = false;
+        }
+        else if (post == null | post == "") {
+            etPostDetails.setError("Please fill this");
+            returnValue = false;
+        }
+
+        return returnValue;
     }
 
     private void showAlertDialog() {
@@ -210,18 +242,17 @@ public class QuickPostFragment extends Fragment {
 //        AlertDialog b = dialogBuilder.create();
 //        b.show();
     }
-    private void getPostCategories(){
+
+    private void getPostCategories() {
 
         String categoryURL = "http://app.dirsos.com/api/getCategory";
-
 
 
     }
 
 
-    private void sendDataToServer(final String sname, final String email, final String post, final String contact, final String image, String post_cat, String p_time, String p_date, String status)
-    {
-        post_cat = "1";
+    private void sendDataToServer(final String sname, final String email, final String post, final String contact, final String image, final String post_cat, String p_time, String p_date, String status) {
+
 
         String url = "http://app.dirsos.com/api/setPost";
         /*String REGISTER_URL = "http://app.dirsos.com/api/setPost/" + sname + "/" + email + "/" + post + "/" + contact + "/" +
@@ -285,7 +316,8 @@ public class QuickPostFragment extends Fragment {
         requestQueue.add(stringRequest);*/
 
         //Showing the progress dialog
-        final ProgressDialog loading = ProgressDialog.show(getActivity(),"Uploading...","Please wait...",false,false);
+        final ProgressDialog loading = ProgressDialog.show(getActivity(), "Uploading...", "Please wait...", false, false);
+        //final String finalPost_cat = this.post_cat;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -293,7 +325,7 @@ public class QuickPostFragment extends Fragment {
                         //Disimissing the progress dialog
                         loading.dismiss();
                         //Showing toast message of the response
-                        Toast.makeText(getActivity(), s , Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {
@@ -302,11 +334,14 @@ public class QuickPostFragment extends Fragment {
                         //Dismissing the progress dialog
                         loading.dismiss();
 
+                        if (volleyError.getMessage().toString() == null) {
+                            Toast.makeText(getActivity(), "Failed to upload. Try again", Toast.LENGTH_LONG).show();
+                        }
+
                         //Showing toast
-                        //
                         Toast.makeText(getActivity(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
                     }
-                }){
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 //Converting Bitmap to String
@@ -314,24 +349,25 @@ public class QuickPostFragment extends Fragment {
                 ByteArrayOutputStream bao = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bao);
                 byte[] ba = bao.toByteArray();
-              //  image = Base64.encodeToString(ba, Base64.DEFAULT);
+                //  image = Base64.encodeToString(ba, Base64.DEFAULT);
                 //Log.d("B64 IMAGE", image);
                 //image = URLEncoder.encode(image, "UTF-8");
 
                 //Log.d("ENCODED IMAGE", image);
 
-                Map<String,String> params = new Hashtable<String, String>();
+                Map<String, String> params = new Hashtable<String, String>();
 
                 //Adding parameters
                 params.put("sname", sname);
                 params.put("email", email);
                 params.put("post", post);
-                params.put("contact", contact);
+                params.put("Contact", contact);
                 params.put("image", image);
-                params.put("post_cat", "post_cat");
-                params.put("p_time", "p_time");
-                params.put("p_date", "p_date");
-                params.put("status", "1");
+                params.put("post_cat", post_cat);
+
+                //params.put("p_time", "p_time");
+                //params.put("p_date", "p_date");
+                //params.put("status", "1");
 
                 //returning parameters
                 return params;
@@ -377,7 +413,7 @@ public class QuickPostFragment extends Fragment {
 
             Uri pickedImage = data.getData();
             // Let's read picked image path using content resolver
-            String[] filePath = { MediaStore.Images.Media.DATA };
+            String[] filePath = {MediaStore.Images.Media.DATA};
             Cursor cursor = view.getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
             cursor.moveToFirst();
             String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
@@ -404,19 +440,20 @@ public class QuickPostFragment extends Fragment {
 //                    ivPic.setImageBitmap(photo);
 //                }
 //            }
-        }
+    }
 
 
     private void initialize() throws UnsupportedEncodingException {
 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
-        //Log.d("Date Checking",dateFormat.format(date));
-        p_date = dateFormat.format(date).toString().substring(0,9);
+//        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//        Date date = new Date();
+//        //Log.d("Date Checking",dateFormat.format(date));
+//        p_date = dateFormat.format(date).toString().substring(0,9);
+//
+//        p_time = dateFormat.format(date).toString().substring(10);
 
-        p_time = dateFormat.format(date).toString().substring(10);
+        post_cat = chooseCategorySpinner.getSelectedItemPosition();
 
-        post_cat = (String) chooseCategorySpinner.getSelectedItem().toString();;
 
         //get strings from edit texts
         sname = etSenderName.getText().toString();

@@ -17,11 +17,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
 
 
             <TextView
-                android:id="@+id/info_text"
+                android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Names"
@@ -30,18 +31,13 @@
                 android:gravity="center"/>
 
             <TextView
-                android:id="@+id/des"
+                android:id="@+id/tvMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Designation"
                 android:textColor="#000000"
                 android:textSize="15sp" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Details"
-                android:id="@+id/bDetails"/>
 
 
         </LinearLayout>

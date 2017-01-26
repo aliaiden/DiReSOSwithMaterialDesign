@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,8 +57,6 @@ public class HomeActivity extends AppCompatActivity {
         myFrag.beginTransaction().replace(R.id.fLayout, new HomeFragment()).commit();
 
 
-
-
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setItemIconTintList(null);
 
@@ -75,11 +74,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
 
+                //close the drawer again
+                NavigationDrawerFragment.mDrawerLayout.closeDrawer(Gravity.LEFT);
+
+
 
 
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        //myFrag.beginTransaction().replace(R.id.fLayout, new HomeFragment()).commit();
+                        myFrag.beginTransaction().replace(R.id.fLayout, new HomeFragment()).commit();
                         // Intent i = new Intent(HomeActivity.this, PostActivity.class);
                         //startActivity(i);
 
@@ -96,8 +99,9 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_donate:
-                        myFrag.beginTransaction().replace(R.id.fLayout, new DonateFragment()).commit();
-                        break;
+                        Uri uri = Uri.parse("http://www.dirsos.com/donation.php"); // missing 'http://' will cause crashed
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);                        break;
 
                     case R.id.nav_announcments:
                         myFrag.beginTransaction().replace(R.id.fLayout, new AnnouncementsFragment()).commit();
@@ -107,16 +111,16 @@ public class HomeActivity extends AppCompatActivity {
                         myFrag.beginTransaction().replace(R.id.fLayout, new AboutFragment()).commit();
                         break;
 
-                    case R.id.nav_events:
-                        myFrag.beginTransaction().replace(R.id.fLayout, new EventsFragment()).commit();
-                        break;
+
                     case R.id.nav_website:
-                        myFrag.beginTransaction().replace(R.id.fLayout, new EventsFragment()).commit();
+                        Uri uriWeb = Uri.parse("http://www.dirsos.com"); // missing 'http://' will cause crashed
+                        Intent intentWeb = new Intent(Intent.ACTION_VIEW, uriWeb);
+                        startActivity(intentWeb);
                         break;
                     case R.id.nav_email:
-                        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                                 "mailto", "info@dirsos.com", null));
-                        startActivity(Intent.createChooser(intent, "Choose an Email client :"));
+                        startActivity(Intent.createChooser(i, "Choose an Email client :"));
                         break;
                     case R.id.nav_sms:
 
@@ -173,8 +177,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        sendNot.setOnClickListener(new View.OnClickListener()
-        {
+        sendNot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -257,8 +260,7 @@ public class HomeActivity extends AppCompatActivity {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage("+923009203159", null, s, null, null);
             Toast.makeText(getApplicationContext(), "Message sent", Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Failed, please try again", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }

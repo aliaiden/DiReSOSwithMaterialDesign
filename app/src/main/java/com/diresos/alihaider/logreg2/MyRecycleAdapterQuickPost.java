@@ -33,7 +33,8 @@ public class MyRecycleAdapterQuickPost extends RecyclerView.Adapter<RecyclerView
     Context context;
     //  public TextView cod;
 
-    public MyRecycleAdapterQuickPost(Context context, String[] senderNames, String[] times, String[] dates, String[] descriptions, String[] images) {
+    public MyRecycleAdapterQuickPost(Context context, String[] senderNames, String[] times, String[] dates, String[] descriptions, String[] images)
+    {
 
         this.context = context;
 

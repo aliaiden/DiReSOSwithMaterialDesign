@@ -13,14 +13,12 @@
             android:title="Quick Post"/>
         <item
             android:id="@+id/nav_missing_person"
-            android:icon="@drawable/ic_dashboard"
+            android:icon="@drawable/ic_missing_person"
             android:title="Missing Persons"/>
         <item
             android:id="@+id/nav_donate"
-            android:icon="@drawable/ic_dashboard"
-            android:title="Donate"/>
-
-
+            android:icon="@drawable/ic_donate"
+            android:title="Donate" />
 
 
         <item
@@ -34,14 +32,11 @@
             android:title="About" />
 
 
-        <item
-            android:id="@+id/nav_events"
-            android:icon="@drawable/logo"
-            android:title="Events" />
+
 
         <item
             android:id="@+id/nav_website"
-            android:icon="@drawable/logo"
+            android:icon="@drawable/ic_website"
             android:title="Website" />
 
     </group>

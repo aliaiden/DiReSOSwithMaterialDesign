@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -83,6 +85,10 @@ public class HomeFragment extends Fragment {
             //  This will create dynamic image view and add them to ViewFlipper
             setFlipperImage(gallery_grid_Images[i]);
         }
+        viewFlipper.setFlipInterval(1500);
+        Animation in = AnimationUtils.loadAnimation(getActivity(),android.R.anim.fade_in); // load an animation
+        viewFlipper.setInAnimation(in); // set in Animation for ViewFlipper
+        viewFlipper.startFlipping();
         viewFlipper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,11 +134,11 @@ public class HomeFragment extends Fragment {
                             try {
 
                                 JSONObject obj = response.getJSONObject(i);
-                                senderNames[i] = obj.getString("Name");
-                                times[i] = obj.getString("gender");
-                                dates[i] = obj.getString("age");
-                                descriptions[i] = obj.getString("last_loc");
-                                images[i] = obj.getString("appearence");
+                                senderNames[i] = obj.getString("Sender_name");
+                                times[i] = obj.getString("Time");
+                                dates[i] = obj.getString("Date");
+                                descriptions[i] = obj.getString("Post");
+                                images[i] = obj.getString("Image");
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

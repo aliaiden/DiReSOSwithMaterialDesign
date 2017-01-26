@@ -6,74 +6,72 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import static java.security.AccessController.getContext;
 
 /**
  * Created by Ali Haider on 11/8/2016.
  */
-public class MyRecycleAdapterAnnouncements extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyRecycleAdapterAnnouncements extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+{
 
-    public String myDataSet[];
-    public String designations[];
-    public String code[];
-    public TextView title;
-    public TextView des;
-    public Button bDetails;
+    public String[] titles;
+    public String[] messages;
+
+    public TextView tvTitle;
+    public TextView tvMessage;
+
+
     Context context;
     //  public TextView cod;
 
+    public MyRecycleAdapterAnnouncements(Context context, String[] titles, String[] messages) {
 
-    public MyRecycleAdapterAnnouncements(Context context, String MyDataSet[], String Designations[]) {
-        this.myDataSet = MyDataSet;
-        this.designations = Designations;
         this.context = context;
-        //this.code = comapnyCode;
+
+        this.titles = titles;
+        this.messages = messages;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        // Just as an example, return 0 or 2 depending on position
+        // Note that unlike in ListView adapters, types don't have to be contiguous
+        return position % 2 * 2;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.announcement_item_view, parent, false);
-        RecyclerView.ViewHolder vh = new MyViewHolder(view);
+        RecyclerView.ViewHolder vh = new MyRecycleAdapterAnnouncements.MyViewHolder(view);
         return (RecyclerView.ViewHolder) vh;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder,final int position) {
 
-        title.setText(myDataSet[position]);
-        des.setText(designations[position]);
-        //cod.setText( code[position] );
-
-        bDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "message", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        tvTitle.setText(titles[position]);
+        tvMessage.setText(messages[position]);
     }
 
     @Override
     public int getItemCount() {
-        return myDataSet.length;
+        // return missingPersonNames.length;
+        return (titles == null) ? 0 : messages.length;
     }
-
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public MyViewHolder(View annItemView) {
-            super(annItemView);
+        public MyViewHolder(View mpItemView) {
+            super(mpItemView);
 
-            title = (TextView) annItemView.findViewById(R.id.info_text);
-            des = (TextView) itemView.findViewById(R.id.des);
-            bDetails = (Button) itemView.findViewById(R.id.bDetails);
-
-
-            // cod = (TextView) itemView.findViewById( R.id.code );
+            tvTitle = (TextView) mpItemView.findViewById(R.id.tvTitle);
+            tvMessage = (TextView) mpItemView.findViewById(R.id.tvMessage);
         }
     }
 }

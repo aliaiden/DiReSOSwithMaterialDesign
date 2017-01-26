@@ -110,15 +110,14 @@ public class AddMissingPersonActivity extends AppCompatActivity {
 
         int checkedRadioButtonId = rgGender.getCheckedRadioButtonId();
 
-            if (checkedRadioButtonId == R.id.rbMale) {
-                gender="Male";
-                return gender;
-            } else if (checkedRadioButtonId == R.id.rbFemale) {
-                gender="Female";
-                return gender;
-            }
-              else
-              return gender;
+        if (checkedRadioButtonId == R.id.rbMale) {
+            gender = "Male";
+            return gender;
+        } else if (checkedRadioButtonId == R.id.rbFemale) {
+            gender = "Female";
+            return gender;
+        } else
+            return gender;
 
     }
 
@@ -301,24 +300,38 @@ public class AddMissingPersonActivity extends AppCompatActivity {
         contact = etContact.getText().toString();
         description = etDescription.getText().toString();
 
+        boolean returnValue = true;
 
-//        if (name == null | name=="") {
-//            etName.setError("Please fill this");
-//            return false;
-//        }
+        if (name == null | name == "") {
+            etName.setError("Please fill this");
+            returnValue = false;
+        } else if (gender == null) {
+            Toast.makeText(this, "Please Select Gender", Toast.LENGTH_SHORT).show();
+            returnValue = false;
+        } else if (age == null | age == "") {
+            etAge.setError("Please fill this");
+            returnValue = false;
+        } else if (lastLocation == null | lastLocation == "") {
+            etLastLocation.setError("Please fill this");
+            returnValue = false;
+        } else if (appearance == null | appearance == "") {
+            etAppearance.setError("Please fill this");
+            returnValue = false;
+        } else if (contact == null | contact == "") {
+            etContact.setError("Please fill this");
+            returnValue = false;
+        } else if (description == null | description == "") {
+            etDescription.setError("Please fill this");
+            returnValue = false;
+        }
 
-//        else if (gender == null) {
-//            Toast.makeText(this, "Please Select Gender", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
-
-        return true;
+        return returnValue;
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(loading != null)
+        if (loading != null)
             loading.dismiss();
     }
 }
